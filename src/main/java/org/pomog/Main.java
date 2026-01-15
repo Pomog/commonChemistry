@@ -1,5 +1,7 @@
 package org.pomog;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -15,5 +17,10 @@ public class Main {
             // for you, but you can always add more by pressing Ctrl+F8.
             System.out.println("i = " + i);
         }
+        
+        Dotenv dotenv = Dotenv.load();
+        
+        
+        System.out.println("CCC_API_KEY from env = " + dotenv.get("CCC_API_KEY"));
     }
 }
