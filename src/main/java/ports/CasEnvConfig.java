@@ -21,11 +21,11 @@ public class CasEnvConfig implements CasConfig{
     }
     @Override
     public String baseUrl() {
-        return null;
+        return baseUrl;
     }
     
     @Override
     public String apiKey() {
-        return null;
+        return apiKey;
     }
 }
