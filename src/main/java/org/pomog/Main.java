@@ -1,26 +1,31 @@
 package org.pomog;
 
+import adapters.http.JavaHttpGateway;
+import chemistry.CasIdentityProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.cdimascio.dotenv.Dotenv;
+import ports.CasConfig;
+import ports.CasEnvConfig;
+import ports.HttpGateway;
+
+import java.net.http.HttpClient;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-        
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-            
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
         
         Dotenv dotenv = Dotenv.load();
-        
-        
         System.out.println("CCC_API_KEY from env = " + dotenv.get("CCC_API_KEY"));
+        
+        CasConfig cfg = CasEnvConfig.fromDotEnv();
+        
+        HttpGateway http = new JavaHttpGateway(HttpClient.newHttpClient());
+        ObjectMapper mapper = new ObjectMapper();
+        
+        CasIdentityProvider idp = new CasIdentityProvider(http, cfg, mapper);
+        
+        System.out.println(idp.resolveByName("caffeine").orElse(null));
+        System.out.println(idp.resolveByCasRn("58-08-2").orElse(null));
     }
 }
