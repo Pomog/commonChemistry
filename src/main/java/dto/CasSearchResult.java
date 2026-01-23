@@ -6,4 +6,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CasSearchResult {
     public String rn;
     public String name;
+    public String svg;
 }

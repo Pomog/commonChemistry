@@ -6,6 +6,9 @@ import ports.CasConfig;
 import ports.HttpGateway;
 import ports.IdentityProvider;
 
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,6 +28,16 @@ public class CasIdentityProvider implements IdentityProvider {
                 "X-API-KEY", config.apiKey(),
                 "Accept", "application/json"
         );
+    }
+    
+    private URI searchUri(String q) {
+        String encoded = URLEncoder.encode(q, StandardCharsets.UTF_8);
+        return URI.create(config.baseUrl() + "/search?q=" + encoded);
+    }
+    
+    private URI detailUri(String casRn) {
+        String encoded = URLEncoder.encode(casRn, StandardCharsets.UTF_8);
+        return URI.create(config.baseUrl() + "/detail?cas_rn=" + encoded);
     }
     
     @Override

@@ -6,5 +6,6 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CasSearchResponse {
+    public Integer count;
     public List<CasSearchResult> results;
 }

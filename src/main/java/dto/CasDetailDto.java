@@ -25,7 +25,7 @@ public class CasDetailDto {
     public List<String> synonyms;
     
     // Contains SVG strings
-    public List<String> images;
+    public String images;
     
     @JsonProperty("experimentalProperties")
     public List<ExperimentalProperty> experimentalProperties;
